@@ -1,7 +1,7 @@
 from numpy import *
 import matplotlib.pyplot as plt
 
-x = arange(-2, 5, .01)
+x = arange(-5, 5, .01)
 y = x ** 2
 
 plt.plot(x, y)

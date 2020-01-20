@@ -2,7 +2,7 @@ from numpy import *
 import matplotlib.pyplot as plt
 
 x = arange(-2, 5, .01)
-y = 2*x + 2
+y = x
 
 plt.plot(x, y)
 # draw a thick red hline at y=0 that spans the xrange
