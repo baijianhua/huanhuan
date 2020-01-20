@@ -1,10 +1,10 @@
-import numpy as np
+from numpy import *
 import matplotlib.pyplot as plt
 
-t = np.arange(-1, 2, .01)
-s = np.sin(2 * np.pi * t)
+x = arange(-1, 2, .01)
+y = sin(2 * pi * x)
 
-plt.plot(t, s)
+plt.plot(x, y)
 # draw a thick red hline at y=0 that spans the xrange
 plt.axhline(linewidth=2, color='r')
 plt.axvline(linewidth=2, color='r')
