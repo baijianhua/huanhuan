@@ -72,3 +72,7 @@ r2 = latex(diff(expr1, x, evaluate=False))
 
 ## 绘制矢量场
 https://tonysyu.github.io/plotting-streamlines-with-matplotlib-and-sympy.html#.XifWcGgzYSE
+
+
+# python 3d绘图
+https://zhuanlan.zhihu.com/p/74923962
