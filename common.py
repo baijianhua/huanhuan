@@ -17,7 +17,7 @@ def plot_latex(lat=""):
 
 
 # https://stackoverflow.com/questions/36505768/in-sympy-plotting-how-can-i-get-a-plot-with-a-fixed-aspect-ratio
-def plot_equation(eq: Equality, x_var=None, y_var=None,):
+def plot_equation(eq: Equality, x_var=None, y_var=None, ):
     # 创建plot但不绘制
     plot = plot_implicit(eq, x_var, y_var, show=False)
     # 自己初始化一个绘制引擎
@@ -28,3 +28,15 @@ def plot_equation(eq: Equality, x_var=None, y_var=None,):
     ax.grid(True)
     matplot.show()
 
+
+def __ms_init(self: Axes, min_size=-2, max_size=5):
+    self.axhline()
+    self.axvline()
+    self.set_aspect('equal')
+    ticks = [i for i in range(min_size, max_size) if i != 0]
+    self.xaxis.set_ticks(ticks)
+    self.yaxis.set_ticks(ticks)
+    self.grid(True)
+
+
+Axes.ms_init = __ms_init
