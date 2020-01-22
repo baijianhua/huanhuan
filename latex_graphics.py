@@ -16,6 +16,6 @@ tex = "$"+lat+"$"
 rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
 rc('text', usetex=True)
 rc('text.latex', preamble=r'\usepackage{amsmath}')
-plt.text(0.5, 0.5, tex, size=40)
+plt.text(0.1, 0.6, tex, size=40)
 plt.axis('off')
 plt.show()
