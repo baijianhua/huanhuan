@@ -1,3 +1,6 @@
+# 好例子
+http://www.faculty.umassd.edu/j.wang/vp/  
+http://elektromagnetisme.no/category/fys1120/tips-tricks/  
 # Latex
 # 偏微分
 现在把具体方程放在偏微分符号右边，看起来还是怪怪的。应该用一个f来代替才对吧？而且这个f应该写在分子上才好
