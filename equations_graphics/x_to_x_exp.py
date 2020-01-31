@@ -3,8 +3,6 @@
 """
 
 # 没这句不行，利用了里面的Axes.ms_init = ms_init
-import float_range as float_range
-from mpmath.libmp.backend import xrange
 from sympy import E
 
 from common import *
@@ -19,13 +17,11 @@ def f(x, y): return E ** (x + y)
 def f1(x): return E ** x
 
 
-min_size = -5
-max_size = 20
 ax: Axes = plt.gca()
 ax.grid(True)
 # ax.ms_init(min_size, max_size)
 # 定义起点终点和步长
-x = np.arange(-3.0, 15, 0.1)
+x = np.arange(-0.2, 2, 0.1)
 # 把y值画在x轴上，实现一维映射
 x1 = [f1(i) for i in x]
 y1 = [0 for i in x]
