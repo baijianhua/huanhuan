@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
+EDGE = 3
+STEP = 10
 
 def plot_grid(x, y, ax=None, **kwargs):
     ax = ax or plt.gca()
@@ -32,9 +34,13 @@ def f1(x: np.array, y: np.array):
         ui = []
         vi = []
         for j in range(0, len(x[i])):
-            print(x[i][j])
-            ui.append(x[i][j] + sig(x[i][j]) * np.exp(-x[i][j]**2 - y[i][j]**2))
-            vi.append(y[i][j] + sig(y[i][j]) * np.exp(-x[i][j]**2 - y[i][j]**2))
+            xx = x[i][j]
+            yy = y[i][j]
+            print("x=", xx, "y=", yy)
+            expn = -xx**2 - yy**2
+            print(expn)
+            ui.append(xx + sig(xx) * np.exp(expn))
+            vi.append(yy + sig(yy) * np.exp(expn))
 
         u.append(ui)
         v.append(vi)
@@ -44,10 +50,12 @@ def f1(x: np.array, y: np.array):
 fig, ax = plt.subplots()
 ax.set_aspect('equal')
 # 需要弄清楚这里产生的是什么结果？不是一个二维数组！
-grid_x, grid_y = np.meshgrid(np.linspace(-3, 3, 20), np.linspace(-3, 3, 20))
-print(grid_x)
+# 第一个数据是x坐标的集合。每一个元素是
+#
+grid_x, grid_y = np.meshgrid(np.linspace(-EDGE, EDGE, STEP), np.linspace(-EDGE, EDGE, STEP))
+# print(grid_x)
 print("-----------------")
-print(grid_y)
+# print(grid_y)
 plot_grid(grid_x, grid_y, ax=ax, color="lightgrey")
 
 distx, disty = f1(grid_x, grid_y)
