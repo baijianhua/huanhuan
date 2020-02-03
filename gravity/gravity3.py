@@ -8,13 +8,17 @@
 越小，直到可以忽略不计
 
 但有个要求是靠近物体的网格，是均匀的受到影响，不能有的多，有的少
+
+或许用极坐标是更好的选择？但是也不行。极坐标如何体现原有的坐标系呢？
+极坐标没有平直的地方，到处都不均匀。
+
 """
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
-EDGE = 4
-STEP = 4 * EDGE + 1
+EDGE = 5
+STEP = 2 * EDGE + 1
 
 
 def plot_grid(x, y, ax=None, **kwargs):
@@ -42,7 +46,7 @@ def f1(x: np.array, y: np.array):
             xx = x[i][j]
             yy = y[i][j]
             print("x=", xx, "y=", yy)
-            expn = - 0.3 * (xx ** 2 + yy ** 2)
+            expn = - 0.2 * (xx ** 2 + yy ** 2)
             # 坐标越远离中心，delta越小。当x=+-1或者y=+-1,
             delta = np.exp(expn)
             print(expn)
