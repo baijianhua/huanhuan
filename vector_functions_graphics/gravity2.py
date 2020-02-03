@@ -7,11 +7,11 @@ from matplotlib.collections import LineCollection
 EDGE = 6
 STEP = 13
 
-dax or plt.gca()
+def plot_grid(x, y, ax=None, **kwargs):
+    ax = ax or plt.gca()
     segs1 = np.stack((x, y), axis=2)
     segs2 = segs1.transpose(1, 0, 2)
-    ax.addef plot_grid(x, y, ax=None, **kwargs):
-    ax = _collection(LineCollection(segs1, **kwargs))
+    ax.add_collection(LineCollection(segs1, **kwargs))
     ax.add_collection(LineCollection(segs2, **kwargs))
     ax.autoscale()
 
