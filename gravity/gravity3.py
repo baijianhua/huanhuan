@@ -1,11 +1,21 @@
 # https://stackoverflow.com/questions/47295473/how-to-plot-using-matplotlib-python-colahs-deformed-grid
 
+"""
+这个形状仍然不对。靠近坐标轴的地方变化太大。不管是横轴还是纵轴。应该是以原点为圆心，各个网格均匀分担才对
+而不管是否靠近坐标轴
+
+变形的目标，是在某处给定一个球体或者立方体，整个坐标中的网格，靠近这个物体的，受到变形影响，距离越远，影响
+越小，直到可以忽略不计
+
+但有个要求是靠近物体的网格，是均匀的受到影响，不能有的多，有的少
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
-EDGE = 6
-STEP = 13
+EDGE = 4
+STEP = 4 * EDGE + 1
+
 
 def plot_grid(x, y, ax=None, **kwargs):
     ax = ax or plt.gca()
@@ -17,14 +27,8 @@ def plot_grid(x, y, ax=None, **kwargs):
 
 
 def sig(i):
+    # return 1
     return -1 if (i < 0) else 1
-
-
-def f(x, y):
-    u = x
-    v = y
-    return u - np.exp(-u ** 2 - v ** 2), v - np.exp(-u ** 2 - v ** 2)
-    # return u - np.exp(-u**2), v - np.exp(-v ** 2)
 
 
 def f1(x: np.array, y: np.array):
@@ -38,50 +42,29 @@ def f1(x: np.array, y: np.array):
             xx = x[i][j]
             yy = y[i][j]
             print("x=", xx, "y=", yy)
-            expn = - (xx**2 + yy**2)**0.5
+            expn = - 0.3 * (xx ** 2 + yy ** 2)
             # 坐标越远离中心，delta越小。当x=+-1或者y=+-1,
             delta = np.exp(expn)
             print(expn)
-            ui.append(xx + sig(xx) * delta)
-            vi.append(yy + sig(yy) * delta)
+            uu = xx if xx == 0 else xx + sig(xx) * delta
+            vv = yy if yy == 0 else yy + sig(yy) * delta
+            print("uu=", uu, "vv=", vv)
+            ui.append(uu)
+            vi.append(vv)
+            # vi.append(yy)
+            # ui.append(xx)
 
         u.append(ui)
         v.append(vi)
     return u, v
 
 
-# def f1(x: np.array, y: np.array):
-#     u = []
-#     v = []
-#     for i in range(0, len(x)):
-#         ui = []
-#         vi = []
-#         for j in range(0, len(x[i])):
-#             print(x[i][j])
-#             ui.append(x[i][j] + sig(x[i][j]) * np.exp(-(x[i][j]**2 + y[i][j]**2)))
-#             vi.append(y[i][j] + sig(y[i][j]) * np.exp(-x[i][j]**2 - y[i][j]**2))
-#
-#         u.append(ui)
-#         v.append(vi)
-#     return u, v
-
-
 fig, ax = plt.subplots()
 ax.set_aspect('equal')
-# 需要弄清楚这里产生的是什么结果？不是一个二维数组！
-# 第一个数据是x坐标的集合。每一个元素是
-#
 grid_x, grid_y = np.meshgrid(np.linspace(-EDGE, EDGE, STEP), np.linspace(-EDGE, EDGE, STEP))
-# print(grid_x)
-print("-----------------")
-# print(grid_y)
 plot_grid(grid_x, grid_y, ax=ax, color="lightgrey")
 
 distx, disty = f1(grid_x, grid_y)
 plot_grid(distx, disty, ax=ax, color="C0")
-
-# distx, disty = f1(grid_x, grid_y)
-# plot_grid(distx, disty, ax=ax, color="C0")
-
 
 plt.show()
