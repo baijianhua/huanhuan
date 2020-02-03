@@ -4,14 +4,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
-EDGE = 3
-STEP = 10
+EDGE = 6
+STEP = 13
 
-def plot_grid(x, y, ax=None, **kwargs):
-    ax = ax or plt.gca()
+dax or plt.gca()
     segs1 = np.stack((x, y), axis=2)
     segs2 = segs1.transpose(1, 0, 2)
-    ax.add_collection(LineCollection(segs1, **kwargs))
+    ax.addef plot_grid(x, y, ax=None, **kwargs):
+    ax = _collection(LineCollection(segs1, **kwargs))
     ax.add_collection(LineCollection(segs2, **kwargs))
     ax.autoscale()
 
@@ -34,13 +34,16 @@ def f1(x: np.array, y: np.array):
         ui = []
         vi = []
         for j in range(0, len(x[i])):
+            # 这样取到的是网格中每个点的坐标，逐行取，从左到右。
             xx = x[i][j]
             yy = y[i][j]
             print("x=", xx, "y=", yy)
-            expn = -xx**2 - yy**2
+            expn = - (xx**2 + yy**2)**0.5
+            # 坐标越远离中心，delta越小。当x=+-1或者y=+-1,
+            delta = np.exp(expn)
             print(expn)
-            ui.append(xx + sig(xx) * np.exp(expn))
-            vi.append(yy + sig(yy) * np.exp(expn))
+            ui.append(xx + sig(xx) * delta)
+            vi.append(yy + sig(yy) * delta)
 
         u.append(ui)
         v.append(vi)
