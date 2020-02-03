@@ -41,6 +41,22 @@ def f1(x: np.array, y: np.array):
     return u, v
 
 
+# def f1(x: np.array, y: np.array):
+#     u = []
+#     v = []
+#     for i in range(0, len(x)):
+#         ui = []
+#         vi = []
+#         for j in range(0, len(x[i])):
+#             print(x[i][j])
+#             ui.append(x[i][j] + sig(x[i][j]) * np.exp(-(x[i][j]**2 + y[i][j]**2)))
+#             vi.append(y[i][j] + sig(y[i][j]) * np.exp(-x[i][j]**2 - y[i][j]**2))
+#
+#         u.append(ui)
+#         v.append(vi)
+#     return u, v
+
+
 fig, ax = plt.subplots()
 ax.set_aspect('equal')
 # 需要弄清楚这里产生的是什么结果？不是一个二维数组！
